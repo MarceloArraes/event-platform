@@ -1,5 +1,6 @@
 import { CheckCircle } from 'phosphor-react'
-import { useState } from 'react';
+import {isPast, format} from 'date-fns';
+import ptBR from 'date-fns/locale/pt-BR';
 
 interface LessonProps{
   title: string;
@@ -10,11 +11,12 @@ interface LessonProps{
 }
 
 function LessonCard(props: LessonProps) {
-  const [isAvailable, setIsAvailable] = useState(false);
+  const isAvailable = isPast(props.availableAt);
+  const availableDateFormatted = format(props.availableAt, "EEEE' • 'd' de 'MMMM' • 'k'h' mm'm'",{locale: ptBR});
 
   return (
     <a href='#'>
-      <span className='text-gray-300'>{props.availableAt.toString()}</span>
+      <span className='text-gray-300'>{availableDateFormatted}</span>
       <div className='rounded border boder-gray-500 p-4 mt-2 '>
       <header className='flex items-center justify-between'>
       {isAvailable ? 

@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-body{
+body {
   @apply bg-gray-800 text-gray-100;
   -webkit-font-smoothing: antialiased;
 }
