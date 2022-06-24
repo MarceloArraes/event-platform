@@ -47,6 +47,7 @@ function VideoPlayer(props: VideoPlayerProps) {
       variables: {
         slug: props.lessonSlug,
       },
+      fetchPolicy: "no-cache",
     }
   );
   console.log(data);
