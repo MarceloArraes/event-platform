@@ -31,18 +31,27 @@ function LessonCard(props: LessonProps) {
         'bg-green-500': isActiveLesson
         })}>
           {isAvailable ? (
-            <span className={classNames('flex items-center gap-2 text-sm text-blue-500 font-medium',{})}>
+            <span className={classNames('flex items-center gap-2 text-sm font-medium', {
+                'text-white': isActiveLesson,
+                'text-blue-500': !isActiveLesson
+            })}>
               <CheckCircle size={20} />
               Conteúdo liberado
             </span>
           ) : (
-            <span className={classNames("flex items-center gap-2 text-sm text-orange-500 font-medium",{})}>
+              <span className={classNames("flex items-center gap-2 text-sm font-medium", {
+                'text-white': isActiveLesson,
+                'text-orange-500': !isActiveLesson
+              })}>
               <CheckCircle size={20} />
               Em breve
             </span>
           )}
 
-          <span className="text-xs rounded px-2 py-[0.125rem] text-white border border-green-300 font-bold ">
+          <span className={classNames("text-xs rounded px-2 py-[0.125rem] text-white border font-bold ", {
+            'border-white': isActiveLesson,
+            'border-green-300': !isActiveLesson
+          })}>
             {props.type === "live" ? "Aula ao vivo" : "Aula presencial"}
           </span>
         </header>
