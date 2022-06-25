@@ -1,7 +1,8 @@
 import { CheckCircle } from "phosphor-react";
 import { isPast, format } from "date-fns";
 import ptBR from "date-fns/locale/pt-BR";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import classNames from "classnames";
 
 interface LessonProps {
   title: string;
@@ -11,6 +12,7 @@ interface LessonProps {
 }
 
 function LessonCard(props: LessonProps) {
+  const {slug} = useParams<{slug: string}>(); 
   const isAvailable = isPast(props.availableAt);
   const availableDateFormatted = format(
     props.availableAt,
@@ -18,19 +20,23 @@ function LessonCard(props: LessonProps) {
     { locale: ptBR }
   );
 
+  const isActiveLesson = slug === props.slug;
+  
   return (
     <Link to={`/event/lesson/${props.slug}`} className="group">
       <span className="text-gray-300">{availableDateFormatted}</span>
 
-      <div className="rounded border border-gray-500 p-4 mt-2 group-hover:border-green-500">
-        <header className="flex items-center justify-between">
+      <div className="">
+        <header className={classNames(` rounded border border-gray-500 p-4 mt-2 group-hover:border-green-500`,{
+        'bg-green-500': isActiveLesson
+        })}>
           {isAvailable ? (
-            <span className="flex items-center gap-2 text-sm text-blue-500 font-medium">
+            <span className={classNames('flex items-center gap-2 text-sm text-blue-500 font-medium',{})}>
               <CheckCircle size={20} />
               Conteúdo liberado
             </span>
           ) : (
-            <span className="flex items-center gap-2 text-sm text-orange-500 font-medium">
+            <span className={classNames("flex items-center gap-2 text-sm text-orange-500 font-medium",{})}>
               <CheckCircle size={20} />
               Em breve
             </span>
@@ -40,7 +46,12 @@ function LessonCard(props: LessonProps) {
             {props.type === "live" ? "Aula ao vivo" : "Aula presencial"}
           </span>
         </header>
-        <strong className="text-gray-200 mt-5 block">{props.title}</strong>
+        <strong className={classNames(' mt-5 block', {
+          'text-white': isActiveLesson,
+          'text-gray-200': !isActiveLesson
+        })}>
+          {props.title}
+        </strong>
       </div>
     </Link>
   );
