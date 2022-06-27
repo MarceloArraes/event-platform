@@ -28,8 +28,6 @@ function Subscribe() {
   
   
 
-  
-
   return (
     <div className="flex flex-col items-center min-h-screen bg-blur bg-cover bg-no-repeat">
       <div className="w-full max-w-[1100px] justify-between flex items-center mt-20 mx-auto">
@@ -75,7 +73,7 @@ function Subscribe() {
           </form>
         </div>
       </div>
-      <img src="/src/assets/code-mockup.png" alt="" className="mt-10" />
+      <img src="src/assets/code-mockup.png" alt="" className="mt-10" />
     </div>
   );
 }
