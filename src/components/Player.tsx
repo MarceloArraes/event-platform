@@ -7,8 +7,9 @@ import {
 } from "phosphor-react";
 import "@vime/core/themes/default.css";
 import { gql, useQuery } from "@apollo/client";
+import { useGetLessonBySlugQuery } from "../graphql/generated";
 
-const GET_LESSONS_BY_SLUG_QUERY = gql`
+/* const GET_LESSONS_BY_SLUG_QUERY = gql`
   query MyQuery($slug: String = "") {
     lesson(where: { slug: $slug }) {
       description
@@ -21,9 +22,9 @@ const GET_LESSONS_BY_SLUG_QUERY = gql`
       }
     }
   }
-`;
+`; */
 
-interface GetLessonBySlugResponse {
+/* interface GetLessonBySlugResponse {
   lesson: {
     title: string;
     description: string;
@@ -34,14 +35,14 @@ interface GetLessonBySlugResponse {
       avatarURL: string;
     };
   };
-}
+} */
 
 interface VideoPlayerProps {
   lessonSlug: string;
 }
 
 function VideoPlayer(props: VideoPlayerProps) {
-  const { data } = useQuery<GetLessonBySlugResponse>(
+/*   const { data } = useQuery<GetLessonBySlugResponse>(
     GET_LESSONS_BY_SLUG_QUERY,
     {
       variables: {
@@ -49,10 +50,15 @@ function VideoPlayer(props: VideoPlayerProps) {
       },
       fetchPolicy: "no-cache",
     }
-  );
+  ); */
+  const { data } = useGetLessonBySlugQuery({
+    variables: {
+      slug: props.lessonSlug,
+    },
+  })
   console.log(data);
 
-  if (!data) {
+  if (!data || !data.lesson) {
     return (
       <div className="flex-1">
         <p>Loading...</p>
@@ -78,6 +84,7 @@ function VideoPlayer(props: VideoPlayerProps) {
             <p className="mt-4 text-gray-200 leading-relaxed  ">
               {data?.lesson.description}
             </p>
+            {data?.lesson.teacher && (
             <div className="flex items-center gap-4 mt-6 ">
               <img
                 className="h-16 w-16 rounded-full border-2 border-blue-500"
@@ -92,7 +99,8 @@ function VideoPlayer(props: VideoPlayerProps) {
                   {data?.lesson.teacher.bio}
                 </span>
               </div>
-            </div>
+            </div>)}
+            
           </div>
           <div className="flex flex-col gap-4">
             <a

@@ -1,8 +1,9 @@
-import React from 'react'
+//import React from 'react'
 import LessonCard from './LessonCard'
-import { gql, useQuery } from '@apollo/client'
+//import { gql, useQuery } from '@apollo/client'
+import { useGetLessonsQuery } from '../graphql/generated'
 
-const GET_LESSONS_QUERY = gql`
+/* const GET_LESSONS_QUERY = gql`
 query {
   lessons(orderBy: publishedAt_ASC, stage: PUBLISHED) {
     id
@@ -11,12 +12,12 @@ query {
     title
     slug
   }
-}`
+}` */
 
-interface GetLessonsQueryResponse{
-/*   lessons:Array<{
+/* interface GetLessonsQueryResponse{
+   lessons:Array<{
 
-}> */
+}> 
 lessons:{
   id: string
   lessonType: 'live'| 'class'
@@ -24,10 +25,11 @@ lessons:{
   title: string
   slug: string
 }[]
-}
+} */
 
 function Sidebar() {
-const {data} = useQuery<GetLessonsQueryResponse>(GET_LESSONS_QUERY)
+//const {data} = useQuery<GetLessonsQueryResponse>(GET_LESSONS_QUERY)
+  const {data} = useGetLessonsQuery( )
 
   return (
     <aside className='w-[348px] bg-gray-700 p-6 border-l border-gray-600'>
