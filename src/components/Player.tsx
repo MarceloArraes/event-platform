@@ -6,7 +6,7 @@ import {
   Lightning,
 } from "phosphor-react";
 import "@vime/core/themes/default.css";
-import { gql, useQuery } from "@apollo/client";
+//import { gql, useQuery } from "@apollo/client";
 import { useGetLessonBySlugQuery } from "../graphql/generated";
 
 /* const GET_LESSONS_BY_SLUG_QUERY = gql`
@@ -56,7 +56,8 @@ function VideoPlayer(props: VideoPlayerProps) {
       slug: props.lessonSlug,
     },
   })
-  console.log(data);
+  
+  console.log("data on video", data);
 
   if (!data || !data.lesson) {
     return (
