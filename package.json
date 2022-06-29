@@ -13,8 +13,6 @@
     "@graphql-codegen/cli": "^2.6.2",
     "@graphql-codegen/typescript": "^2.5.1",
     "@graphql-codegen/typescript-operations": "^2.4.2",
-    "@vime/core": "^5.3.1",
-    "@vime/react": "^5.3.1",
     "classnames": "^2.3.1",
     "date-fns": "^2.28.0",
     "graphql": "^16.5.0",

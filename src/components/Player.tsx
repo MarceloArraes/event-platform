@@ -58,8 +58,6 @@ function VideoPlayer(props: VideoPlayerProps) {
     },
   })
 
-  console.log("data on video", data);
-
   if (!data || !data.lesson) {
     return (
       <div className="flex-1">
@@ -85,7 +83,6 @@ function VideoPlayer(props: VideoPlayerProps) {
             <YouTube videoId={data.lesson.videoId}
             loading="lazy"
             iframeClassName={"embed embed-youtube aspect-video h-full w-full"}
-            //containerClassName={"embed embed-youtube"}
             opts={opts}/>)}
         </div>
       </div>
