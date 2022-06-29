@@ -3,6 +3,7 @@ import { Logo } from "../components/Logo";
 //import { gql, useMutation } from "@apollo/client";
 import { useNavigate } from "react-router-dom";
 import { useCreateSubscriberMutation } from "../graphql/generated";
+import codeMockupImage from "/src/assets/code-mockup.png";
 
 
 /*   const CREATE_SUBSCRIBER_MUTATION = gql`
@@ -19,15 +20,15 @@ function Subscribe() {
   const [name, setName] = useState("");
   //const [createSubscriber, { data, loading }] = useMutation(CREATE_SUBSCRIBER_MUTATION);
   const [createSubscriber, { loading }] = useCreateSubscriberMutation();
-  
+
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     console.log(email, name);
     await createSubscriber({ variables: { email, name } });
     navigate("/event");
   }
-  
-  
+
+
 
   return (
     <div className="flex flex-col items-center min-h-screen bg-blur bg-cover bg-no-repeat">
@@ -74,8 +75,7 @@ function Subscribe() {
           </form>
         </div>
       </div>
-     
-      <img src="src/assets/code-mockup.png" alt="" className="mt-10" />
+      <img src={codeMockupImage} alt="" className="mt-10" />
     </div>
   );
 }
