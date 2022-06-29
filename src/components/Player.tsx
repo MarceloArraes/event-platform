@@ -1,11 +1,12 @@
-import { Youtube, Player, DefaultUi } from "@vime/react";
+//import {  Player, DefaultUi } from "@vime/react";
+import YouTube from "react-youtube";
 import {
   CaretRight,
   DiscordLogo,
   FileArrowDown,
   Lightning,
 } from "phosphor-react";
-import "@vime/core/themes/default.css";
+
 //import { gql, useQuery } from "@apollo/client";
 import { useGetLessonBySlugQuery } from "../graphql/generated";
 
@@ -56,7 +57,7 @@ function VideoPlayer(props: VideoPlayerProps) {
       slug: props.lessonSlug,
     },
   })
-  
+
   console.log("data on video", data);
 
   if (!data || !data.lesson) {
@@ -67,14 +68,25 @@ function VideoPlayer(props: VideoPlayerProps) {
     );
   }
 
+  const opts = {
+    playerVars: {
+      // https://developers.google.com/youtube/player_parameters
+      //autoplay: 1
+      color: 'white',
+      rel: 0,
+    }
+  };
+
   return (
     <div className="flex-1 ">
       <div className="bg-black ">
-        <div className="h-full w-full max-w-[1100px] max-h-[60vh] aspect-video">
-          <Player>
-            <Youtube videoId={data!.lesson.videoId} />
-            <DefaultUi />
-          </Player>
+        <div className="h-full w-full max-w-[1100px] max-h-[60vh] aspect-video items-center justify-center">
+          {data.lesson.videoId && (
+            <YouTube videoId={data.lesson.videoId}
+            loading="lazy"
+            iframeClassName={"embed embed-youtube aspect-video h-full w-full"}
+            //containerClassName={"embed embed-youtube"}
+            opts={opts}/>)}
         </div>
       </div>
 
@@ -101,7 +113,7 @@ function VideoPlayer(props: VideoPlayerProps) {
                 </span>
               </div>
             </div>)}
-            
+
           </div>
           <div className="flex flex-col gap-4">
             <a
